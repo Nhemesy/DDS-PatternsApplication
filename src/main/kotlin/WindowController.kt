@@ -6,15 +6,6 @@ class WindowController : Controller() {
     val loginScreen: Window by inject()
     val workbench: Workbench by inject()
 
-    fun init() {
-        with (config) {
-            if (containsKey(USERNAME) && containsKey(PASSWORD))
-                tryLogin(string(USERNAME), string(PASSWORD), true)
-            else
-                showLoginScreen("Please log in")
-        }
-    }
-
     fun showLoginScreen(message: String, shake: Boolean = false) {
         if (FX.primaryStage.scene.root != loginScreen.root) {
             FX.primaryStage.scene.root = loginScreen.root
@@ -23,11 +14,6 @@ class WindowController : Controller() {
         }
 
         loginScreen.title = message
-
-        Platform.runLater {
-            loginScreen.username.requestFocus()
-            if (shake) loginScreen.shakeStage()
-        }
     }
 
     fun showWorkbench() {
@@ -38,27 +24,8 @@ class WindowController : Controller() {
         }
     }
 
-    fun tryLogin(username: String, password: String, remember: Boolean) {
-        runAsync {
-            username == "admin" && password == "secret"
-        } ui { successfulLogin ->
+    fun send(cliente: Cliente, envio: Envio) {
 
-            if (successfulLogin) {
-                loginScreen.clear()
-
-                if (remember) {
-                    with (config) {
-                        set(USERNAME to username)
-                        set(PASSWORD to password)
-                        save()
-                    }
-                }
-
-                showWorkbench()
-            } else {
-                showLoginScreen("Login failed. Please try again.", true)
-            }
-        }
     }
 
     fun logout() {

@@ -10,7 +10,6 @@ class Main : App(Window::class) {
     override fun start(stage: Stage) {
         importStylesheet(InternalWindow.Styles::class)
         super.start(stage)
-        loginController.init()
     }
 }
 

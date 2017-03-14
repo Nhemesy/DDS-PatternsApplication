@@ -13,9 +13,13 @@ class Window : View() {
     override val root = GridPane()
     val loginController: WindowController by inject()
 
-    var username: TextField by singleAssign()
-    var password: PasswordField by singleAssign()
-    var remember: CheckBox by singleAssign()
+    var nombre: TextField by singleAssign()
+    var direccion: TextField by singleAssign()
+    var codpostal: TextField by singleAssign()
+    var telefono: TextField by singleAssign()
+    var direcciondest: TextField by singleAssign()
+    var codpostaldest: TextField by singleAssign()
+    var peso: TextField by singleAssign()
 
     init {
         title = "Please log in"
@@ -23,28 +27,37 @@ class Window : View() {
         with (root) {
             addClass(loginScreen)
 
-            row("Username") {
-                username = textfield()
+            row("Nombre") {
+                nombre = textfield()
             }
-
-            row("Password") {
-                password = passwordfield()
+            row("Direccion") {
+                direccion = textfield()
             }
-
-            row("Remember me") {
-                remember = checkbox()
+            row("Codigo postal") {
+                codpostal= textfield()
             }
-
+            row("Telefono") {
+                telefono = textfield()
+            }
+            row("Direccion destino") {
+                direcciondest = textfield()
+            }
+            row("Codigo postal destino") {
+                codpostaldest= textfield()
+            }
+            row("Peso") {
+                peso = textfield()
+            }
             row {
-                button("Login") {
+                button("Enviar") {
                     isDefaultButton = true
 
-                    setOnAction {
-                        loginController.tryLogin(
-                                username.text,
-                                password.text,
-                                remember.isSelected
-                        )
+                    //setOnAction {
+                     //   loginController.tryLogin(
+                     //           username.text,
+                     //           password.text,
+                     //           remember.isSelected
+                     //   )
                     }
                 }
             }
@@ -52,11 +65,6 @@ class Window : View() {
         }
     }
 
-    fun clear() {
-        username.clear()
-        password.clear()
-        remember.isSelected = false
-    }
 
     fun shakeStage() {
         var x = 0
@@ -96,4 +104,3 @@ class Window : View() {
         timelineX.play()
         timelineY.play();
     }
-}
