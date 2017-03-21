@@ -2,8 +2,6 @@ import Styles.Companion.loginScreen
 import javafx.animation.KeyFrame
 import javafx.animation.Timeline
 import javafx.event.EventHandler
-import javafx.scene.control.CheckBox
-import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import javafx.scene.layout.GridPane
 import javafx.util.Duration
@@ -22,9 +20,9 @@ class Window : View() {
     var peso: TextField by singleAssign()
 
     init {
-        title = "Please log in"
+        title = "Envia tu mierda"
 
-        with (root) {
+        with(root) {
             addClass(loginScreen)
 
             row("Nombre") {
@@ -34,7 +32,7 @@ class Window : View() {
                 direccion = textfield()
             }
             row("Codigo postal") {
-                codpostal= textfield()
+                codpostal = textfield()
             }
             row("Telefono") {
                 telefono = textfield()
@@ -43,7 +41,7 @@ class Window : View() {
                 direcciondest = textfield()
             }
             row("Codigo postal destino") {
-                codpostaldest= textfield()
+                codpostaldest = textfield()
             }
             row("Peso") {
                 peso = textfield()
@@ -51,56 +49,13 @@ class Window : View() {
             row {
                 button("Enviar") {
                     isDefaultButton = true
-
-                    //setOnAction {
-                     //   loginController.tryLogin(
-                     //           username.text,
-                     //           password.text,
-                     //           remember.isSelected
-                     //   )
+                    setOnAction{
+                        loginController.send(Cliente(nombre.text, direccion.text, codpostal.text.toInt(),
+                                telefono.text.toInt()), Envio(direcciondest.text, codpostaldest.text.toInt(), peso.text.toDouble()))
                     }
                 }
             }
-
         }
+
     }
-
-
-    fun shakeStage() {
-        var x = 0
-        var y = 0
-        val cycleCount = 10
-        val move = 10
-        val keyframeDuration = Duration.seconds(0.04)
-
-        val stage = FX.primaryStage
-
-        val timelineX = Timeline(KeyFrame(keyframeDuration, EventHandler {
-            if (x == 0) {
-                stage.x = stage.x + move
-                x = 1
-            } else {
-                stage.x = stage.x - move
-                x = 0
-            }
-        }))
-
-        timelineX.cycleCount = cycleCount
-        timelineX.isAutoReverse = false
-
-        val timelineY = Timeline(KeyFrame(keyframeDuration, EventHandler {
-            if (y == 0) {
-                stage.y = stage.y + move
-                y = 1;
-            } else {
-                stage.y = stage.y - move
-                y = 0;
-            }
-        }))
-
-        timelineY.cycleCount = cycleCount;
-        timelineY.isAutoReverse = false;
-
-        timelineX.play()
-        timelineY.play();
-    }
+}
