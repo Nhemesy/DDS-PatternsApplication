@@ -51,7 +51,7 @@ class Window : View() {
                     isDefaultButton = true
                     setOnAction{
                         loginController.send(Cliente(nombre.text, direccion.text, codpostal.text.toInt(),
-                                telefono.text.toInt()), Envio(direcciondest.text, codpostaldest.text.toInt(), peso.text.toDouble()))
+                                telefono.text.toInt()), EnvioFactory().envioPorPeso(peso.text.toDouble())!!)
                     }
                 }
             }

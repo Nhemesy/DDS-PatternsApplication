@@ -24,7 +24,7 @@ class WindowController : Controller() {
         }
     }
 
-    fun send(cliente: Cliente, envio: Envio) {
+    fun send(cliente: Cliente,codpostal: String, envio: Envio) {
 
     }
 
